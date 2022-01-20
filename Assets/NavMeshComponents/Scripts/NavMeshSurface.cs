@@ -79,6 +79,13 @@ namespace UnityEngine.AI
         NavMeshData m_NavMeshData;
         public NavMeshData navMeshData { get { return m_NavMeshData; } set { m_NavMeshData = value; } }
 
+        [SerializeField]
+        float m_MinRegionArea;
+        public float MinRegionArea { get { return m_MinRegionArea; } set { m_MinRegionArea = value; } }
+        [SerializeField]
+        bool m_OverrideMinRegionArea;
+        public bool overrideMinRegionArea { get { return m_OverrideMinRegionArea; } set { m_OverrideMinRegionArea = value; } }
+
         // Do not serialize - runtime only state.
         NavMeshDataInstance m_NavMeshDataInstance;
         Vector3 m_LastPosition = Vector3.zero;
@@ -153,6 +160,11 @@ namespace UnityEngine.AI
                 buildSettings.overrideVoxelSize = true;
                 buildSettings.voxelSize = voxelSize;
             }
+            if (overrideMinRegionArea)
+            {
+              buildSettings.minRegionArea = m_MinRegionArea;
+            }
+            
             return buildSettings;
         }
 
